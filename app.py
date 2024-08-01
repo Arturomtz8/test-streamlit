@@ -27,7 +27,6 @@ df["year_month"] = df["year"] + "-" + df["month"]
 df.drop_duplicates(["date", "medicine_id", "country"], keep="last", inplace=True)
 
 df.drop(columns=["month"], inplace=True)
-print(df.head())
 
 all_countries = ["All"] + list(df["country"].unique())
 all_years = ["All"] + list(sorted(df["year"].unique()))
@@ -53,7 +52,6 @@ else:
         (df["country"] == selected_country) & (df["year"] == selected_year)
     ]
 
-print(filtered_data)
 if not filtered_data.empty:
     fig = px.bar(
         filtered_data,
@@ -119,7 +117,6 @@ else:
         & (avg_pricing["year"] == selected_year)
     ]
 
-print(second_filtered_data)
 second_filtered_data.drop(columns=["year_month"], inplace=True)
 if not second_filtered_data.empty:
     st.dataframe(second_filtered_data, hide_index=True)
