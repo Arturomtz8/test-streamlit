@@ -120,5 +120,6 @@ else:
     ]
 
 print(second_filtered_data)
+second_filtered_data.drop(columns=["year_month"], inplace=True)
 if not second_filtered_data.empty:
     st.dataframe(second_filtered_data, hide_index=True)
