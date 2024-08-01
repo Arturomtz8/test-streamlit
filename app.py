@@ -1,4 +1,3 @@
-# Import the Streamlit library
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -6,12 +5,6 @@ import streamlit as st
 from load_db import get_table
 
 st.set_page_config(page_title="Axmed App", page_icon=":tada:")
-
-
-# first task
-# -	Price evolution as function of time for the SKUs
-# in the provided data sources, with ability to filter by countries
-
 st.title("Price evolution by country and year")
 
 
@@ -79,12 +72,7 @@ if not filtered_data.empty:
     st.plotly_chart(fig)
 
 
-# Load data into DataFrame
 df = pd.read_csv("pricing_history.csv", parse_dates=["date"])
-# df["year"] = df["date"].dt.year
-# df = df[df["year"] == 2024]
-
-# Filter data for "Amoxicillin Tablet 500mg"
 amox_data = df[df["medicine"] == "Amoxicillin Tablet 500mg"]
 
 amox_data["year"] = amox_data["date"].dt.year.astype(str)
@@ -134,15 +122,3 @@ else:
 print(second_filtered_data)
 if not second_filtered_data.empty:
     st.dataframe(second_filtered_data, hide_index=True)
-
-    # fig = px.line(
-    #     second_filtered_data,
-    #     x="year_month",
-    #     y="avg_month",
-    #     color="country",
-    #     labels={"month_year": "Month", "avg_price": "Average Price"},
-    #     title="Average Monthly Pricing for Amoxicillin",
-    #     line_group="country",
-    # )
-
-    # st.plotly_chart(fig)
